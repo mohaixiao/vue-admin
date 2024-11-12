@@ -3,6 +3,7 @@
     <el-form
       class="login-form"
       :model="form"
+      :rules="rules"
       label-width="auto"
       style="max-width: 600px"
     >
@@ -11,9 +12,7 @@
       </div>
       <el-form-item prop="username">
         <span class="svg-container">
-          <el-icon>
-            <avatar />
-          </el-icon>
+          <svg-icon icon="user" />
         </span>
         <el-input
           v-model="form.name"
@@ -25,9 +24,7 @@
 
       <el-form-item prop="password">
         <span class="svg-container">
-          <el-icon>
-            <avatar />
-          </el-icon>
+          <svg-icon icon="password" />
         </span>
         <el-input
           v-model="form.password"
@@ -36,9 +33,7 @@
           type="password"
         />
         <span class="show-pwd">
-          <el-icon>
-            <avatar />
-          </el-icon>
+          <svg-icon icon="eye" />
         </span>
       </el-form-item>
 
@@ -91,14 +86,14 @@ $cursor: #fff;
 
     ::v-deep .el-input {
       display: inline-block;
-      height: 45px;
+      height: 42px;
       width: 400px;
       input {
         background: transparent;
         border: 0px;
         -webkit-appearance: none;
         border-radius: 0px;
-        height: 45px;
+        height: 42px;
         width: 400px;
         caret-color: $cursor;
       }

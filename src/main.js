@@ -1,5 +1,5 @@
 import './assets/main.scss'
-
+import 'virtual:svg-icons-register'
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
 import * as ElementPlusIconsVue from '@element-plus/icons-vue'

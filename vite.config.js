@@ -1,4 +1,5 @@
-import { fileURLToPath, URL } from 'node:url'
+import path from 'path'
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 
 import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
@@ -18,10 +19,14 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
+    createSvgIconsPlugin({
+      iconDirs: [path.resolve(process.cwd(), 'src/assets/icons')],
+      symbolId: 'icon-[dir]-[name]',
+    }),
   ],
   resolve: {
     alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '@': path.resolve(__dirname, '/src'), // 假设您的源代码在 src 目录
     },
   },
   css: {
