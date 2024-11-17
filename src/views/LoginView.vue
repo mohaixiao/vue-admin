@@ -84,6 +84,16 @@ $cursor: #fff;
       border-radius: 5px;
     }
 
+    ::v-deep .el-input__wrapper {
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+
+    ::v-deep .is-focus {
+      box-shadow: none;
+    }
+
     ::v-deep .el-input {
       display: inline-block;
       height: 42px;
