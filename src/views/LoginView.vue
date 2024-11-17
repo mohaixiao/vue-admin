@@ -30,10 +30,13 @@
           v-model="form.password"
           placeholder="password"
           name="password"
-          type="password"
+          :type="passwordType"
         />
         <span class="show-pwd">
-          <svg-icon icon="eye" />
+          <svg-icon
+            :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
+            @click="onChangePwdType"
+          />
         </span>
       </el-form-item>
 
@@ -45,13 +48,19 @@
 </template>
 
 <script lang="ts" setup>
-import { reactive } from 'vue'
+import { reactive, ref } from 'vue'
 
 // do not use same name with ref
 const form = reactive({
   name: '',
   password: '',
 })
+
+const passwordType = ref('password')
+
+const onChangePwdType = () => {
+  passwordType.value = passwordType.value === 'password' ? 'text' : 'password'
+}
 
 const onSubmit = () => {
   console.log('submit!')
