@@ -40,7 +40,10 @@
         </span>
       </el-form-item>
 
-      <el-button type="primary" style="width: 100%; margin-bottom: 30px"
+      <el-button
+        type="primary"
+        style="width: 100%; margin-bottom: 30px"
+        @click="onSubmit"
         >登录</el-button
       >
     </el-form>
@@ -49,6 +52,8 @@
 
 <script lang="ts" setup>
 import { reactive, ref } from 'vue'
+import { useAuthStore } from '@/stores/auth'
+import { useRouter } from 'vue-router'
 
 // do not use same name with ref
 const form = reactive({
@@ -56,14 +61,23 @@ const form = reactive({
   password: '',
 })
 
+const authStore = useAuthStore()
+const router = useRouter()
 const passwordType = ref('password')
 
 const onChangePwdType = () => {
   passwordType.value = passwordType.value === 'password' ? 'text' : 'password'
 }
 
-const onSubmit = () => {
-  console.log('submit!')
+const onSubmit = async () => {
+  console.log('submit!', form.name, form.password)
+  if (await authStore.login(form.name, form.password)) {
+    alert('Login successful!')
+    // 登录后操作
+    router.push('/')
+  } else {
+    alert('Login failed!')
+  }
 }
 </script>
 

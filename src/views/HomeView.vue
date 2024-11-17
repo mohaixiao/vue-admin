@@ -1,9 +1,9 @@
+<template>
+  <div class="">Layout 页面</div>
+</template>
+
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import {} from 'vue'
 </script>
 
-<template>
-  <main>
-    <TheWelcome />
-  </main>
-</template>
+<style lang="scss" scoped></style>

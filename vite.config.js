@@ -42,4 +42,14 @@ export default defineConfig({
       },
     },
   },
+  server: {
+    proxy: {
+      // 匹配所有以 /api 开头的请求
+      '/api': {
+        target: 'https://api.imooc-admin.lgdsunday.club/', // 你的后端服务地址
+        changeOrigin: true, // 必须设置为true，否则会请求到代理服务器
+        rewrite: path => path.replace(/^\/api/, ''), // 重写路径，去掉路径中的 /api
+      },
+    },
+  },
 })
