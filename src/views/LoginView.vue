@@ -60,6 +60,7 @@
 import { reactive, ref } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useRouter } from 'vue-router'
+import md5 from 'md5'
 
 // do not use same name with ref
 const form = reactive({
@@ -77,7 +78,9 @@ const onChangePwdType = () => {
 
 const onSubmit = async () => {
   console.log('submit!', form.name, form.password)
-  if (await authStore.login(form.name, form.password)) {
+  // 使用 md5 加密密码
+  const encryptedPassword = md5(form.password)
+  if (await authStore.login(form.name, encryptedPassword)) {
     alert('Login successful!')
     // 登录后操作
     router.push('/')
