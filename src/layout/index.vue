@@ -1,9 +1,11 @@
 <template>
-  <div class="app-wrapper">
+  <div class="relative h-full w-full clearfix">
     <!-- 左侧 menu -->
     <sidebar id="guide-sidebar" class="sidebar-container" />
-    <div class="main-container">
-      <div class="fixed-header">
+    <div
+      class="main-container min-h-full transition-[margin-left] duration-[0.28s] ml-[210px] relative"
+    >
+      <div class="fixed top-0 right-0 z-[9] w-[calc(100%-210px)]">
         <!-- 顶部的 navbar -->
         <navbar />
       </div>
@@ -18,23 +20,3 @@ import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar/index.vue'
 import AppMain from './components/AppMain.vue'
 </script>
-
-<style lang="scss" scoped>
-@import '../assets/styles/mixin.scss';
-@import '../assets/styles/variables.scss';
-
-.app-wrapper {
-  @include clearfix;
-  position: relative;
-  height: 100%;
-  width: 100%;
-}
-
-.fixed-header {
-  position: fixed;
-  top: 0;
-  right: 0;
-  z-index: 9;
-  width: calc(100% - #{$sideBarWidth});
-}
-</style>

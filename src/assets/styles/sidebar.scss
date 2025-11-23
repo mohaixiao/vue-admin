@@ -1,21 +1,9 @@
 #app {
-  .main-container {
-    min-height: 100%;
-    transition: margin-left #{$sideBarDuration};
-    margin-left: $sideBarWidth;
-    position: relative;
-  }
+  // main-container 样式已移至 layout/index.vue 使用 Tailwind 类
 
   .sidebar-container {
-    transition: width #{$sideBarDuration};
-    width: $sideBarWidth !important;
-    height: 100%;
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1001;
-    overflow: hidden;
+    @apply transition-[width] duration-[0.28s] h-full fixed top-0 bottom-0 left-0 z-[1001] overflow-hidden;
+    width: 210px !important;
 
     // 重置 element-plus 的css
     .horizontal-collapse-transition {
@@ -46,23 +34,19 @@
     }
 
     a {
-      display: inline-block;
-      width: 100%;
-      overflow: hidden;
+      @apply inline-block w-full overflow-hidden;
     }
 
     .svg-icon {
-      margin-right: 16px;
+      @apply mr-4;
     }
 
     .sub-el-icon {
-      margin-right: 12px;
-      margin-left: -2px;
+      @apply mr-3 -ml-0.5;
     }
 
     .el-menu {
-      border: none;
-      height: 100%;
+      @apply border-0 h-full;
       width: 100% !important;
     }
 
@@ -81,43 +65,43 @@
       width: 54px !important;
     }
 
+    // main-container 样式已移至 layout/index.vue 使用 Tailwind 类
     .main-container {
-      margin-left: 54px;
+      @apply ml-[54px];
     }
 
     .submenu-title-noDropdown {
-      padding: 0 !important;
-      position: relative;
+      @apply p-0 relative;
 
       .el-tooltip {
-        padding: 0 !important;
+        @apply p-0;
 
         .svg-icon {
-          margin-left: 20px;
+          @apply ml-5;
         }
 
         .sub-el-icon {
-          margin-left: 19px;
+          @apply ml-[19px];
         }
       }
     }
 
     .el-submenu {
-      overflow: hidden;
+      @apply overflow-hidden;
 
       & > .el-submenu__title {
-        padding: 0 !important;
+        @apply p-0;
 
         .svg-icon {
-          margin-left: 20px;
+          @apply ml-5;
         }
 
         .sub-el-icon {
-          margin-left: 19px;
+          @apply ml-[19px];
         }
 
         .el-submenu__icon-arrow {
-          display: none;
+          @apply hidden;
         }
       }
     }
@@ -126,11 +110,7 @@
       .el-submenu {
         & > .el-submenu__title {
           & > span {
-            height: 0;
-            width: 0;
-            overflow: hidden;
-            visibility: hidden;
-            display: inline-block;
+            @apply h-0 w-0 overflow-hidden invisible inline-block;
           }
         }
       }
@@ -138,13 +118,13 @@
   }
 
   .el-menu--collapse .el-menu .el-submenu {
-    min-width: $sideBarWidth !important;
+    min-width: 210px !important;
   }
 
   .withoutAnimation {
     .main-container,
     .sidebar-container {
-      transition: none;
+      @apply transition-none;
     }
   }
 }
@@ -152,30 +132,27 @@
 .el-menu--vertical {
   & > .el-menu {
     .svg-icon {
-      margin-right: 16px;
+      @apply mr-4;
     }
     .sub-el-icon {
-      margin-right: 12px;
-      margin-left: -2px;
+      @apply mr-3 -ml-0.5;
     }
   }
 
   // 菜单项过长时
   > .el-menu--popup {
-    max-height: 100vh;
-    overflow-y: auto;
+    @apply max-h-screen overflow-y-auto;
 
     &::-webkit-scrollbar-track-piece {
-      background: #d3dce6;
+      @apply bg-[#d3dce6];
     }
 
     &::-webkit-scrollbar {
-      width: 6px;
+      @apply w-1.5;
     }
 
     &::-webkit-scrollbar-thumb {
-      background: #99a9bf;
-      border-radius: 20px;
+      @apply bg-[#99a9bf] rounded-[20px];
     }
   }
 }

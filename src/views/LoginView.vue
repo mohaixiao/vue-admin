@@ -1,17 +1,19 @@
 <template>
-  <div class="login-container">
+  <div class="min-h-screen w-full bg-[#2d3a4b] overflow-hidden">
     <el-form
-      class="login-form"
+      class="relative w-[520px] max-w-full pt-40 px-9 mx-auto overflow-hidden"
       :model="form"
       :rules="rules"
       label-width="auto"
       style="max-width: 600px"
     >
-      <div class="title-container">
-        <h3 class="title">用户登录</h3>
+      <div class="relative">
+        <h3 class="text-[26px] text-[#eee] my-0 mx-auto mb-10 text-center font-bold">
+          用户登录
+        </h3>
       </div>
-      <el-form-item prop="username">
-        <span class="svg-container">
+      <el-form-item prop="username" class="login-form-item">
+        <span class="inline-block py-1.5 pl-4 pr-1 text-[#889aa4] align-middle">
           <svg-icon icon="user" />
         </span>
         <el-input
@@ -19,11 +21,12 @@
           name="username"
           placeholder="username"
           type="text"
+          class="login-input"
         />
       </el-form-item>
 
-      <el-form-item prop="password">
-        <span class="svg-container">
+      <el-form-item prop="password" class="login-form-item">
+        <span class="inline-block py-1.5 pl-4 pr-1 text-[#889aa4] align-middle">
           <svg-icon icon="password" />
         </span>
         <el-input
@@ -31,8 +34,11 @@
           placeholder="password"
           name="password"
           :type="passwordType"
+          class="login-input"
         />
-        <span class="show-pwd">
+        <span
+          class="absolute right-2.5 top-1.5 text-base text-[#889aa4] cursor-pointer select-none"
+        >
           <svg-icon
             :icon="passwordType === 'password' ? 'eye' : 'eye-open'"
             @click="onChangePwdType"
@@ -42,7 +48,7 @@
 
       <el-button
         type="primary"
-        style="width: 100%; margin-bottom: 30px"
+        class="w-full mb-[30px]"
         @click="onSubmit"
         >登录</el-button
       >
@@ -82,108 +88,25 @@ const onSubmit = async () => {
 </script>
 
 <style lang="scss" scoped>
-$bg: #2d3a4b;
-$dark_gray: #889aa4;
-$light_gray: #eee;
-$cursor: #fff;
+:deep(.login-form-item) {
+  @apply border border-white/10 bg-black/10 rounded-md;
+}
 
-.login-container {
-  min-height: 100%;
-  width: 100%;
-  background-color: $bg;
-  overflow: hidden;
+:deep(.el-input__wrapper) {
+  @apply bg-transparent border-0 shadow-none;
+}
 
-  .login-form {
-    position: relative;
-    width: 520px;
-    max-width: 100%;
-    padding: 160px 35px 0;
-    margin: 0 auto;
-    overflow: hidden;
+:deep(.is-focus) {
+  @apply shadow-none;
+}
 
-    ::v-deep .el-form-item {
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(0, 0, 0, 0.1);
-      border-radius: 5px;
-    }
+:deep(.login-input) {
+  @apply inline-block h-[42px] w-[400px];
 
-    ::v-deep .el-input__wrapper {
-      background: transparent;
-      border: 0;
-      box-shadow: none;
-    }
-
-    ::v-deep .is-focus {
-      box-shadow: none;
-    }
-
-    ::v-deep .el-input {
-      display: inline-block;
-      height: 42px;
-      width: 400px;
-      input {
-        background: transparent;
-        border: 0px;
-        -webkit-appearance: none;
-        border-radius: 0px;
-        height: 42px;
-        width: 400px;
-        caret-color: $cursor;
-      }
-    }
-  }
-
-  .tips {
-    font-size: 16px;
-    line-height: 28px;
-    color: #fff;
-    margin-bottom: 10px;
-
-    span {
-      &:first-of-type {
-        margin-right: 16px;
-      }
-    }
-  }
-
-  .svg-container {
-    padding: 6px 5px 6px 15px;
-    color: $dark_gray;
-    vertical-align: middle;
-    display: inline-block;
-  }
-
-  .title-container {
-    position: relative;
-
-    .title {
-      font-size: 26px;
-      color: $light_gray;
-      margin: 0px auto 40px auto;
-      text-align: center;
-      font-weight: bold;
-    }
-
-    ::v-deep .lang-select {
-      position: absolute;
-      top: 4px;
-      right: 0;
-      background-color: white;
-      font-size: 22px;
-      padding: 4px;
-      border-radius: 4px;
-      cursor: pointer;
-    }
-  }
-
-  .show-pwd {
-    position: absolute;
-    right: 10px;
-    top: 7px;
-    font-size: 16px;
-    color: $dark_gray;
-    cursor: pointer;
-    user-select: none;
+  input {
+    @apply bg-transparent border-0 rounded-none h-[42px] w-[400px];
+    -webkit-appearance: none;
+    caret-color: #fff;
   }
 }
 </style>
