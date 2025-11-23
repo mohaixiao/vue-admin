@@ -8,7 +8,9 @@
       style="max-width: 600px"
     >
       <div class="relative">
-        <h3 class="text-[26px] text-[#eee] my-0 mx-auto mb-10 text-center font-bold">
+        <h3
+          class="text-[26px] text-[#eee] my-0 mx-auto mb-10 text-center font-bold"
+        >
           用户登录
         </h3>
       </div>
@@ -49,6 +51,7 @@
       <el-button
         type="primary"
         class="w-full mb-[30px]"
+        :loading="isLoading"
         @click="onSubmit"
         >登录</el-button
       >
@@ -71,21 +74,27 @@ const form = reactive({
 const authStore = useAuthStore()
 const router = useRouter()
 const passwordType = ref('password')
+const isLoading = ref(false)
 
 const onChangePwdType = () => {
   passwordType.value = passwordType.value === 'password' ? 'text' : 'password'
 }
 
 const onSubmit = async () => {
-  console.log('submit!', form.name, form.password)
-  // 使用 md5 加密密码
-  const encryptedPassword = md5(form.password)
-  if (await authStore.login(form.name, encryptedPassword)) {
-    alert('Login successful!')
-    // 登录后操作
-    router.push('/')
-  } else {
-    alert('Login failed!')
+  if (isLoading.value) return
+  isLoading.value = true
+  try {
+    // 使用 md5 加密密码
+    const encryptedPassword = md5(form.password)
+    if (await authStore.login(form.name, encryptedPassword)) {
+      alert('Login successful!')
+      // 登录后操作
+      router.push('/')
+    } else {
+      alert('Login failed!')
+    }
+  } finally {
+    isLoading.value = false
   }
 }
 </script>
