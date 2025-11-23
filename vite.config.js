@@ -43,12 +43,18 @@ export default defineConfig({
     },
   },
   server: {
+    port: 5173,
+    host: true,
     proxy: {
       // 匹配所有以 /api 开头的请求
       '/api': {
-        target: 'https://api.imooc-admin.lgdsunday.club/', // 你的后端服务地址
+        target: 'https://api.imooc-admin.lgdsunday.club',
         changeOrigin: true, // 必须设置为true，否则会请求到代理服务器
-        rewrite: path => path.replace(/^\/api/, ''), // 重写路径，去掉路径中的 /api
+        secure: true, // 如果是 https 接口，需要配置这个参数
+        // 先尝试不重写路径，保持 /api 前缀
+        // 如果后端路径是 /api/sys/login，则不需要 rewrite
+        // 如果后端路径是 /sys/login，则需要取消注释下面的 rewrite
+        // rewrite: path => path.replace(/^\/api/, ''),
       },
     },
   },

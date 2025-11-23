@@ -1,9 +1,9 @@
+@use './styles/variables' as *;
+@use './styles/sidebar';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
-@import './styles/variables.scss';
-@import './styles/sidebar.scss';
 
 @layer base {
   html,
