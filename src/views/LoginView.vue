@@ -86,8 +86,8 @@ const onSubmit = async () => {
   try {
     // 使用 md5 加密密码
     const encryptedPassword = md5(form.password)
-    const res = authStore.login(form.name, encryptedPassword)
-    if (res.code === 200) {
+    await authStore.login(form.name, encryptedPassword)
+    if (localStorage.getItem('token')) {
       // 登录后操作
       router.push('/')
     } else {

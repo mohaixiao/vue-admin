@@ -10,8 +10,8 @@ export const useAuthStore = defineStore('auth', {
     async login(username, password) {
       try {
         const response = await login({ username, password })
-        this.token = response.data.token
-        this.user = response.data.user
+        this.token = response.token
+        this.user = response.user
         localStorage.setItem('token', this.token)
         return true
       } catch (error) {
