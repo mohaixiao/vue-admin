@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { ElMessage } from 'element-plus'
 import { useAuthStore } from '@/stores/auth'
+import { isCheckTimeout } from '@/utils/auth'
+import router from '@/router'
 
 const service = axios.create({
   baseURL: import.meta.env.VITE_APP_BASE_API, // 注意这里的更改
@@ -14,6 +16,13 @@ service.interceptors.request.use(
     // 在这个位置需要统一的去注入token
     const authStore = useAuthStore()
     if (authStore.token) {
+      // 检查 token 是否超时
+      if (isCheckTimeout()) {
+        // 登出操作
+        authStore.logout()
+        router.push('/login')
+        return Promise.reject(new Error('token 失效'))
+      }
       // 如果token存在 注入token
       config.headers.Authorization = `Bearer ${authStore.token}`
     }
@@ -38,7 +47,17 @@ service.interceptors.response.use(
     }
   },
   error => {
-    // TODO: 将来处理 token 超时问题
+    // 处理 token 超时问题
+    if (
+      error.response &&
+      error.response.data &&
+      error.response.data.code === 401
+    ) {
+      // token超时
+      const authStore = useAuthStore()
+      authStore.logout()
+      router.push('/login')
+    }
     ElMessage.error(error.message) // 提示错误信息
     return Promise.reject(error)
   },

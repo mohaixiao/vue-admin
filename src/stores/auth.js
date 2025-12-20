@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { login, getUserInfo } from '@/api/sys'
 import { removeAllItem } from '@/utils/storage'
+import { setTimeStamp } from '@/utils/auth'
 
 export const useAuthStore = defineStore('auth', {
   state: () => {
@@ -17,6 +18,8 @@ export const useAuthStore = defineStore('auth', {
         const response = await login({ username, password })
         this.token = response.token
         localStorage.setItem('token', this.token)
+        // 保存登录时间
+        setTimeStamp()
         return true
       } catch (error) {
         console.error('Login failed:', error)
