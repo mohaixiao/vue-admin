@@ -1,5 +1,4 @@
-@use './styles/variables' as *;
-@use './styles/sidebar';
+@import './styles/index.scss';
 
 @tailwind base;
 @tailwind components;

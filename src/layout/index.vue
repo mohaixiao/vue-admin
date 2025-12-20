@@ -1,14 +1,14 @@
 <template>
-  <div class="relative h-full w-full clearfix">
+  <div id="app">
     <!-- 左侧 menu -->
-    <sidebar id="guide-sidebar" class="sidebar-container" />
-    <div
-      class="main-container min-h-full transition-[margin-left] duration-[0.28s] ml-[210px] relative"
-    >
-      <div class="fixed top-0 right-0 z-[9] w-[calc(100%-210px)]">
-        <!-- 顶部的 navbar -->
-        <navbar />
-      </div>
+    <sidebar
+      id="guide-sidebar"
+      class="sidebar-container"
+      :style="{ backgroundColor: variables.menuBg }"
+    />
+    <div class="main-container">
+      <!-- 顶部的 navbar -->
+      <navbar />
       <!-- 内容区 -->
       <app-main />
     </div>
@@ -19,4 +19,5 @@
 import Navbar from './components/Navbar.vue'
 import Sidebar from './components/Sidebar/index.vue'
 import AppMain from './components/AppMain.vue'
+import variables from '@/assets/styles/variables.js'
 </script>
