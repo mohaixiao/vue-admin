@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import { login, getUserInfo } from '@/api/sys'
+import { removeAllItem } from '@/utils/storage'
 
 export const useAuthStore = defineStore('auth', {
   state: () => {
@@ -28,9 +29,11 @@ export const useAuthStore = defineStore('auth', {
       return res
     },
     logout() {
+      // 清理当前用户缓存数据
       this.token = null
       this.userInfo = {}
-      localStorage.removeItem('token')
+      // 清理所有 localStorage 数据
+      removeAllItem()
     },
   },
   getters: {
