@@ -21,7 +21,7 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore()
   if (to.name === 'login' && authStore.isLoggedIn) {
     // 如果用户已经登录，尝试访问登录页面，则重定向到首页
@@ -30,7 +30,12 @@ router.beforeEach((to, from, next) => {
     // 如果用户未登录，尝试访问非登录页面，则重定向到登录页面
     next({ name: 'login' })
   } else {
-    // 其他情况，正常放行
+    // 判断用户资料是否获取
+    // 若不存在用户信息，则需要获取用户信息
+    if (to.name !== 'login' && !authStore.hasUserInfo) {
+      // 触发获取用户信息的 action
+      await authStore.getUserInfo()
+    }
     next()
   }
 })
